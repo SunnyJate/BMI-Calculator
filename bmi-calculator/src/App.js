@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import './App.css'
 
 export default function App() {
   const [weight, setWeight] = useState(50);
@@ -10,6 +11,12 @@ export default function App() {
   function onHeightChange(event){
     setHeight(event.target.value)
   }
+  const output = useMemo(()=>{
+    const calculeteHeight = height/100;
+
+    return(weight/(calculeteHeight*calculeteHeight)).toFixed(1 )
+  },[weight,height]);
+
   return (
     <main>
       <h1>BMI CALCULATOR</h1>
@@ -24,13 +31,13 @@ export default function App() {
           onChange={onWeightChange}
         />
         <p className="slider-output">Height: {height}</p>
-        <input className="input-slider" type="range" 
+        <input className="input-slider" type="range" min={140} max={220}
         onChange={onHeightChange}
         />
       </div>
       <div className="output-section">
         <p>Your BMI is</p>
-        <p className="output">100</p>
+        <p className="output">{output}</p>
       </div>
     </main>
   );
