@@ -2,9 +2,13 @@ import React, { useMemo, useState } from "react";
 import './App.css'
 
 export default function App() {
+  const [age, setAge] = useState(0);
   const [weight, setWeight] = useState(50);
   const [height, setHeight] = useState(150);
 
+  function onAgeChange(event){
+    setAge(event.target.value);
+  }
   function onWeightChange(event){
     setWeight(event.target.value)
   }
@@ -21,6 +25,13 @@ export default function App() {
     <main>
       <h1>BMI CALCULATOR</h1>
       <div className="input-section">
+        <p className="number-output">Age: {age}</p>
+        <input
+          className="input-number"
+          type="number"
+          min='10'
+          max='100'
+          onChange ={onAgeChange}/>
         <p className="slider-output">Weight: {weight}</p>
         <input
           className="input-slider"
